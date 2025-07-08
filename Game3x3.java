@@ -15,7 +15,6 @@ public class Game3x3 extends Game {
         int[] pos = new int[2];
         boolean userInputRequired = true;
         Scanner scanner = new Scanner(System.in);
-
         while (userInputRequired) {
             System.out.println("Enter a valid position on the board:");
             System.out.print("Row: ");
@@ -27,6 +26,7 @@ public class Game3x3 extends Game {
             
             } catch(Exception e) {
                 System.out.println("\nInvalid number entered!");
+                scanner = new Scanner(System.in);
                 continue;
             }
             // Check that position is inside the board

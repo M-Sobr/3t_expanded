@@ -49,12 +49,32 @@ public class Board {
         }
     }
 
+    /**
+     * Returns the symbol occupied by the tile selected.
+     * 
+     * @param row The row number of the tile.
+     * @param col The column number of the tile.
+     * @return The symbol on the tile as a char.
+     * 
+     * @throws InvalidPositionException If the position given is invalid.
+     */
     public char getTile(int row, int col) {
-        if ((row < boardSize) && (col < boardSize)) {  // Tile position is valid
+        if (containsPosition(row, col)) {  // Tile position is valid
             return tiles[row][col];
         } else {
             throw new InvalidPositionException("Position [" + row + ", " + col + "] is not valid on this board!");
         }
+    }
+
+    /**
+     * Returns true if the given row and column is a valid tile on the board.
+     * 
+     * @param row The row number of the tile.
+     * @param col The column number of the tile.
+     * @return A boolean containing information about if the given row and column combination exists on the board.
+     */
+    public boolean containsPosition(int row, int col) {
+        return ((row < boardSize) && (col < boardSize) && (row >= 0) && (col >= 0));
     }
 
 
@@ -68,7 +88,7 @@ public class Board {
      * @throws InvalidPositionException When the given row and col is not a valid position on the board.
      */
     public void setTile(int row, int col, char symbol) {
-        if ((row < boardSize) && (col < boardSize)) {  // Tile position is valid
+        if (containsPosition(row, col)) {  // Tile position is valid
             tiles[row][col] = symbol;
         } else {
             throw new InvalidPositionException("Position [" + row + ", " + col + "] is not valid on this board!");

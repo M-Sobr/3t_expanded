@@ -14,6 +14,24 @@ public class ScoreCalculator {
         players[1] = player2;
     }
     
+    private int getLineLengthInDirection(int rowPos, int colPos, int rowDirection, int colDirection) {
+        char originSymbol = board.getTile(rowPos, colPos);
+        int lineLength = 1;
+        while (true) {
+            rowPos += rowDirection;
+            colPos += colDirection;
+            if (!board.containsPosition(rowPos, colPos)) {
+                return lineLength;
+            }
+
+            if (board.getTile(rowPos, colPos) == originSymbol) {
+                lineLength ++;
+            } else {
+                return lineLength;
+            }
+        }
+    }
+
     public List<Integer> calculateScores() {
         // Initialise scores in local scope from zero, calculate scores from current board state
         //  and then update scores of players.
@@ -28,6 +46,7 @@ public class ScoreCalculator {
         for (int i = 0; i < board.getRows(); i++) {
             for (int j = 0; j < board.getCols(); j++) {
                 // Check NE(1,-1), E(0,1), SE(1,1) and S(1,0) directions for lines:
+                
             }
         }
 
