@@ -1,11 +1,27 @@
+/** Represents a square board of a game which can be any size */
 public class Board {
-    private char[][] tiles = {
-        {'X', 'O', 'X'}, 
-        {'_', 'O', '_'}, 
-        {'X', '_', '_'}};
+    private static final char EMPTY_TILE = '_';
     
-    private int boardSize = 3;
+    private char[][] tiles;
+    private int boardSize;
 
+    /**
+     * Create a new square game board with a specified side length.
+     * @param boardSize The width and height of the board, as an int.
+    */
+    public Board(int boardSize) {
+        this.boardSize = boardSize;
+        tiles = new char[boardSize][boardSize];
+
+        // Initialise board to all empty spaces:
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                tiles[i][j] = EMPTY_TILE;
+            }
+        }
+    }
+
+    /** Prints the contents of this board to the terminal. */
     public void printBoard() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
