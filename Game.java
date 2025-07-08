@@ -27,6 +27,7 @@ public abstract class Game {
      */
     protected abstract int[] getUserPlacedTilePosition();
 
+    
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
         boolean gameOngoing = true;
@@ -35,15 +36,25 @@ public abstract class Game {
         while (gameOngoing) {
             currentPlayerSymbol = players.get(currentPlayerIndex).getSymbol();
             
-            // Place a tile on the board of the appropriate player.
+            // Print scores
+            System.out.println("Current Scoreboard:");
+            for (Player player : players) {
+                System.out.println(player.getSymbol() + ": "+ player.getPoints());
+            }
+            System.out.println();
+            
+            // Print information about board
             System.out.println("Board State:");
             board.printBoard();
             System.out.println("\nIt is " + currentPlayerSymbol + "'s turn.");
             
+            // Place a tile on the board of the appropriate player.
             int[] placeTilePosition = getUserPlacedTilePosition();
             board.setTile(placeTilePosition[0], placeTilePosition[1], currentPlayerSymbol);
             System.out.println();
             
+            // Calculate scores of players.
+
             // Change turn to next player.
             currentPlayerIndex = (currentPlayerIndex + 1) % 2;
         }

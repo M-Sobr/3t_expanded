@@ -5,6 +5,7 @@
 */
 public class Player {
     private char symbol;
+    private int points;
 
     /**
      * Create a new player for a tic-tac-toe game.
@@ -13,6 +14,7 @@ public class Player {
      */
     public Player(char symbol) {
         this.symbol = symbol;
+        this.points = 0;
     }
 
     /**
@@ -22,6 +24,24 @@ public class Player {
      */
     public char getSymbol() {
         return this.symbol;
+    }
+
+    /**
+     * Returns the number of points this player has. This does not include calculation of the points of any player.
+     * 
+     * @return The number of points of this player.
+     */
+    public int getPoints() {
+        return points;
+    }
+
+    /**
+     * Set the number of points this player has to the value provided.
+     * 
+     * @param points  The number of points this player has.
+     */
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     @Override
