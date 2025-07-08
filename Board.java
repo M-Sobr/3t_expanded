@@ -30,4 +30,21 @@ public class Board {
             System.out.println();
         }
     }
+
+    /**
+     * Set the character of a symbol on the board.
+     * 
+     * @param row The row number of the tile to change on the board.
+     * @param col The column number of the tile to change on the board.
+     * @param symbol  The symbol to replace the tile with, given as a char.
+     * 
+     * @throws InvalidPositionException When the given row and col is not a valid position on the board.
+     */
+    public void setTile(int row, int col, char symbol) {
+        if ((row < boardSize) && (col < boardSize)) {  // Tile position is valid
+            tiles[row][col] = symbol;
+        } else {
+            throw new InvalidPositionException("Position [" + row + ", " + col + "] is not valid on this board!");
+        }
+    }
 }
