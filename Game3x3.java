@@ -44,5 +44,4 @@ public class Game3x3 extends Game {
         }
         return pos;
     }
-
 }

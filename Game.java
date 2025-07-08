@@ -4,7 +4,7 @@ import java.util.List;
 /** Represents a game of tic-tac-toe */
 public abstract class Game {
     protected Board board;
-    private List<Player> players;
+    protected List<Player> players;
     private int currentPlayerIndex;
 
     /** Create a new 3x3 game to be played. */
@@ -27,6 +27,15 @@ public abstract class Game {
      */
     protected abstract int[] getUserPlacedTilePosition();
 
+    
+    /** Calculate the scores of each player on the current board. */
+    private void calculateScores() {
+        
+        List<Integer> scores = (new ScoreCalculator(board, 
+            players.get(0).getSymbol(), players.get(1).getSymbol())
+            ).calculateScores();
+    }
+    
     
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
@@ -54,6 +63,7 @@ public abstract class Game {
             System.out.println();
             
             // Calculate scores of players.
+            calculateScores();
 
             // Change turn to next player.
             currentPlayerIndex = (currentPlayerIndex + 1) % 2;

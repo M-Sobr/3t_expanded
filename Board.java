@@ -21,6 +21,24 @@ public class Board {
         }
     }
 
+    /**
+     * Returns the number of rows of this board.
+     * 
+     * @return The number of rows of the board.
+     */
+    public int getRows() {
+        return boardSize;
+    }
+
+    /**
+     * Returns the number of columns of this board.
+     * 
+     * @return The number of columns of the board.
+     */
+    public int getCols() {
+        return boardSize;
+    }
+
     /** Prints the contents of this board to the terminal. */
     public void printBoard() {
         for (int i = 0; i < boardSize; i++) {
