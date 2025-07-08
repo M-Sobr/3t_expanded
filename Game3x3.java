@@ -8,4 +8,13 @@ public class Game3x3 extends Game {
         super(BOARD_SIZE);
     }
 
+    @Override
+    protected int[] getUserPlacedTilePosition() {
+        int[] pos = new int[2];
+        // Temporary functionality.
+        pos[0] = 0;
+        pos[1] = 0;
+        return pos;
+    }
+
 }

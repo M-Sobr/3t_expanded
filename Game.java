@@ -20,13 +20,12 @@ public abstract class Game {
         players.add(new Player('O'));
     }
 
-    private int[] getUserPlacedTilePosition() {
-        int[] pos = new int[2];
-        // Temporary functionality.
-        pos[0] = 0;
-        pos[1] = 0;
-        return pos;
-    }
+    /**
+     * Controls the functionality of getting user input for choosing a tile position.
+     * 
+     * @return An int array of size 2 containing the row and column of the tile entered by the user.
+     */
+    protected abstract int[] getUserPlacedTilePosition();
 
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
