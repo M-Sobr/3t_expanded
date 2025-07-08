@@ -1,6 +1,6 @@
 /** Represents a square board of a game which can be any size */
 public class Board {
-    private static final char EMPTY_TILE = '_';
+    public static final char EMPTY_TILE = '_';
     
     private char[][] tiles;
     private int boardSize;
@@ -30,6 +30,15 @@ public class Board {
             System.out.println();
         }
     }
+
+    public char getTile(int row, int col) {
+        if ((row < boardSize) && (col < boardSize)) {  // Tile position is valid
+            return tiles[row][col];
+        } else {
+            throw new InvalidPositionException("Position [" + row + ", " + col + "] is not valid on this board!");
+        }
+    }
+
 
     /**
      * Set the character of a symbol on the board.

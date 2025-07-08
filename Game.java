@@ -3,7 +3,7 @@ import java.util.List;
 
 /** Represents a game of tic-tac-toe */
 public abstract class Game {
-    private Board board;
+    protected Board board;
     private List<Player> players;
     private int currentPlayerIndex;
 
@@ -30,11 +30,22 @@ public abstract class Game {
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
         boolean gameOngoing = true;
+        char currentPlayerSymbol;
+        
         while (gameOngoing) {
+            currentPlayerSymbol = players.get(currentPlayerIndex).getSymbol();
+            
+            // Place a tile on the board of the appropriate player.
             System.out.println("Board State:");
             board.printBoard();
+            System.out.println("\nIt is " + currentPlayerSymbol + "'s turn.");
+            
             int[] placeTilePosition = getUserPlacedTilePosition();
-            board.setTile(placeTilePosition[0], placeTilePosition[1], players.get(currentPlayerIndex).getSymbol());
+            board.setTile(placeTilePosition[0], placeTilePosition[1], currentPlayerSymbol);
+            System.out.println();
+            
+            // Change turn to next player.
+            currentPlayerIndex = (currentPlayerIndex + 1) % 2;
         }
 
     }
