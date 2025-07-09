@@ -31,12 +31,15 @@ public abstract class Game {
     /** Calculate the scores of each player on the current board. */
     private void calculateScores() {
         
-        List<Integer> scores = (new ScoreCalculator(board, 
+        int[] scores = (new ScoreCalculator(board, 
             players.get(0).getSymbol(), players.get(1).getSymbol())
             ).calculateScores();
+        
+        players.get(0).setPoints(scores[0]);
+        players.get(1).setPoints(scores[1]);
     }
     
-    
+
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
         boolean gameOngoing = true;
