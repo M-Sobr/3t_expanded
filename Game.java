@@ -1,17 +1,20 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /** Represents a game of tic-tac-toe */
 public abstract class Game {
     protected Board board;
     protected List<Player> players;
     private int currentPlayerIndex;
+    private int winningPoints;
 
     /** Create a new 3x3 game to be played. */
-    public Game(int boardSize) {
+    public Game(int boardSize, int winningPoints) {
         this.board = new Board(boardSize);
         initialisePlayers();
         currentPlayerIndex = 0;
+        this.winningPoints = winningPoints;
     }
 
     private void initialisePlayers() {
@@ -44,6 +47,7 @@ public abstract class Game {
     public void run() {
         boolean gameOngoing = true;
         char currentPlayerSymbol;
+        int turnsElapsed = 0;
         
         while (gameOngoing) {
             currentPlayerSymbol = players.get(currentPlayerIndex).getSymbol();
@@ -65,12 +69,27 @@ public abstract class Game {
             board.setTile(placeTilePosition[0], placeTilePosition[1], currentPlayerSymbol);
             System.out.println();
             
-            // Calculate scores of players.
+            // Calculate scores of players and check if game has ended or not.
             calculateScores();
+            for (Player player : players) {
+                if (player.getPoints() >= winningPoints) {
+                    gameOngoing = false;
+                    System.out.println("Player " + player.getSymbol() + " has won the game!");
+                }
+            }
+
+            turnsElapsed ++;
+            if (turnsElapsed == board.getRows() * board.getCols()) {
+                gameOngoing = false;
+                System.out.println("All board positions are filled so the game is a stalemate.");
+                System.out.println("No player wins.");
+            }
 
             // Change turn to next player.
             currentPlayerIndex = (currentPlayerIndex + 1) % 2;
         }
-
+        Scanner closing = new Scanner(System.in);
+        closing.nextLine();
+        closing.close();
     }
 }

@@ -4,10 +4,11 @@ import java.util.Scanner;
 public class Game3x3 extends Game {
     
     private static final int BOARD_SIZE = 3;
+    private static final int WINNING_POINTS = 1;
 
     /** Create a new 3x3 game to be played. */
     public Game3x3() {
-        super(BOARD_SIZE);
+        super(BOARD_SIZE, WINNING_POINTS);
     }
 
     @Override
