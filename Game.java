@@ -41,6 +41,11 @@ public abstract class Game {
         players.get(0).setPoints(scores[0]);
         players.get(1).setPoints(scores[1]);
     }
+
+    /** Nothing happens for a generic game but a game with sections will override this method. */
+    protected void printSectionDetails() {
+
+    }
     
 
     /** Runs a tic-tac-toe game from start to finish */
@@ -64,6 +69,8 @@ public abstract class Game {
             board.printBoard();
             System.out.println("\nIt is " + currentPlayerSymbol + "'s turn.");
             
+            printSectionDetails();
+
             // Place a tile on the board of the appropriate player.
             int[] placeTilePosition = getUserPlacedTilePosition();
             board.setTile(placeTilePosition[0], placeTilePosition[1], currentPlayerSymbol);

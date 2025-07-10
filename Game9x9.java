@@ -44,8 +44,8 @@ public class Game9x9 extends GameWithSections {
             }
 
             // Check that the quadrant matches what is required
-            if (super.tileInRequiredSection(pos[0], pos[1]) && !super.sectionFull()) {
-                super.printSectionDetails();
+            if ((!super.tileInRequiredSection(pos[0], pos[1])) && (!super.requiredSectionFull())) {
+                super.printPlacementInInvalidSectionMessage();
                 continue;
             }
 

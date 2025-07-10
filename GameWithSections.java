@@ -12,6 +12,10 @@ public abstract class GameWithSections extends Game {
         nextSection[1] = -1;
     }
 
+    private boolean anySectionPossible() {
+        return (nextSection[0] == -1) && (nextSection[1] == -1);
+    }
+
     /**
      * Returns true if the given position is inside the required section to play in.
      * 
@@ -20,7 +24,7 @@ public abstract class GameWithSections extends Game {
      * @return Boolean of if the tile is in the required section.
      */
     protected boolean tileInRequiredSection(int row, int col) {
-        if ((nextSection[0] == -1) && (nextSection[1] == -1)) {
+        if (anySectionPossible()) {
             return true;
         }
 
@@ -34,15 +38,44 @@ public abstract class GameWithSections extends Game {
 
     }
 
-    protected boolean sectionFull() {
+    /**
+     * @return True if every tile in a section is occupied by a tile.
+     */
+    protected boolean requiredSectionFull() {
+        if (anySectionPossible()) {
+            return false;
+        }
+
+        for (int i = nextSection[0] * regionSize; i < (nextSection[0] + 1) * regionSize; i++) {
+            for (int j = nextSection[1] * regionSize; j < (nextSection[1] + 1) * regionSize; j++) {
+                if (board.getTile(i,j) == Board.EMPTY_TILE) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
-    protected void printSectionDetails() {
-
+    protected void printPlacementInInvalidSectionMessage() {
+        System.out.println("Placement cannot be made in an invalid section!");
+        System.out.println("The required section is [" + (nextSection[0] + 1) + ", " + (nextSection[1] + 1) + "].");
     }
 
+    /** Update the section for placing a tile next from a given position. 
+     * 
+     * @param pos The position which the tile was placed in, as an array containing [row, col].
+    */
     protected void updateNextSection(int[] pos) {
+        nextSection[0] = pos[0] % regionSize;
+        nextSection[1] = pos[1] % regionSize;
+    }
 
+    @Override
+    protected void printSectionDetails() {
+        if (anySectionPossible()) {
+            System.out.println("You can place anywhere.");
+        }
+        
+        System.out.println("The required section is [" + (nextSection[0] + 1) + ", " + (nextSection[1] + 1) + "].");
     }
 }
