@@ -15,10 +15,10 @@ public class Main {
                 new Game3x3().run();
                 break;
             } else if (input.equals("2")) { // 4x4 game
-                
+                new Game4x4().run();
                 break;
             } else if (input.equals("3")) { // 9x9 game
-                
+                new Game9x9().run();
                 break;
             }
         }
