@@ -88,6 +88,14 @@ public abstract class Game {
             // Change turn to next player.
             currentPlayerIndex = (currentPlayerIndex + 1) % 2;
         }
+
+        // Print final scores
+        System.out.println("Final Scoreboard:");
+        for (Player player : players) {
+            System.out.println(player.getSymbol() + ": "+ player.getPoints());
+        }
+        System.out.println();
+
         Scanner closing = new Scanner(System.in);
         closing.nextLine();
         closing.close();
