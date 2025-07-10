@@ -1,3 +1,4 @@
+/** Represents a game of tic-tac-toe which has a board split into sections which are required to play in. */
 public abstract class GameWithSections extends Game {
     
     private int regionSize;
@@ -11,8 +12,26 @@ public abstract class GameWithSections extends Game {
         nextSection[1] = -1;
     }
 
+    /**
+     * Returns true if the given position is inside the required section to play in.
+     * 
+     * @param row  The row number of the position.
+     * @param col  The column number of the position.
+     * @return Boolean of if the tile is in the required section.
+     */
     protected boolean tileInRequiredSection(int row, int col) {
+        if ((nextSection[0] == -1) && (nextSection[1] == -1)) {
+            return true;
+        }
+
+        if ((row < (nextSection[0] * regionSize)) || (row > ((nextSection[0] + 1) * regionSize - 1))) {
+            return false;
+        }
+        if ((col < (nextSection[1] * regionSize)) || (col > ((nextSection[1] + 1) * regionSize - 1))) {
+            return false;
+        }
         return true;
+
     }
 
     protected boolean sectionFull() {
