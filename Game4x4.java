@@ -5,10 +5,37 @@ public class Game4x4 extends Game {
     
     private static final int BOARD_SIZE = 4;
     private static final int WINNING_POINTS = 2;
+    
+    /** [-1, -1] = Any quadrant
+     *  [0, 0] = Top-Left Quadrant
+     *  [0, 1] = Top-Right Quadrant
+     *  [1, 0] = Bottom-Left Quadrant
+     *  [1, 1] = Bottom-Right Quadrant
+     */
+    private int[] nextTileQuadrantPlacement;
 
     /** Create a new 4x4 game to be played. */
     public Game4x4() {
         super(BOARD_SIZE, WINNING_POINTS);
+        nextTileQuadrantPlacement = new int[2];
+        nextTileQuadrantPlacement[0] = -1;
+        nextTileQuadrantPlacement[1] = -1;
+    }
+
+    private boolean tileInRequiredQuadrant(int row, int col) {
+        return true;
+    }
+
+    private boolean quadrantFull() {
+        return true;
+    }
+
+    private void printQuadrantDetails() {
+
+    }
+
+    private void updateNextQuadrant(int[] pos) {
+
     }
 
     @Override
@@ -41,8 +68,16 @@ public class Game4x4 extends Game {
                 System.out.println("\nThe tile must be empty!");
                 continue;
             }
+
+            // Check that the quadrant matches what is required
+            if (tileInRequiredQuadrant(pos[0], pos[1]) && !quadrantFull()) {
+                printQuadrantDetails();
+                continue;
+            }
+
             userInputRequired = false;
         }
+        updateNextQuadrant(pos);
         return pos;
     }
 }
