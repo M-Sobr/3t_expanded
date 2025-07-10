@@ -1,14 +1,15 @@
 import java.util.Scanner;
 
 /** Used for a 9x9 tic-tac-toe game */
-public class Game9x9 extends Game {
+public class Game9x9 extends GameWithSections {
     
     private static final int BOARD_SIZE = 9;
     private static final int WINNING_POINTS = 9;
+    private static final int REGION_SIZE = 3;
 
     /** Create a new 4x4 game to be played. */
     public Game9x9() {
-        super(BOARD_SIZE, WINNING_POINTS);
+        super(BOARD_SIZE, WINNING_POINTS, REGION_SIZE);
     }
 
     @Override
@@ -41,8 +42,16 @@ public class Game9x9 extends Game {
                 System.out.println("\nThe tile must be empty!");
                 continue;
             }
+
+            // Check that the quadrant matches what is required
+            if (super.tileInRequiredSection(pos[0], pos[1]) && !super.sectionFull()) {
+                super.printSectionDetails();
+                continue;
+            }
+
             userInputRequired = false;
         }
+        super.updateNextSection(pos);
         return pos;
     }
 }

@@ -1,41 +1,16 @@
 import java.util.Scanner;
 
 /** Used for a 4x4 tic-tac-toe game */
-public class Game4x4 extends Game {
+public class Game4x4 extends GameWithSections {
     
     private static final int BOARD_SIZE = 4;
     private static final int WINNING_POINTS = 2;
-    
-    /** [-1, -1] = Any quadrant
-     *  [0, 0] = Top-Left Quadrant
-     *  [0, 1] = Top-Right Quadrant
-     *  [1, 0] = Bottom-Left Quadrant
-     *  [1, 1] = Bottom-Right Quadrant
-     */
-    private int[] nextTileQuadrantPlacement;
+    private static final int REGION_SIZE = 2;    
+
 
     /** Create a new 4x4 game to be played. */
     public Game4x4() {
-        super(BOARD_SIZE, WINNING_POINTS);
-        nextTileQuadrantPlacement = new int[2];
-        nextTileQuadrantPlacement[0] = -1;
-        nextTileQuadrantPlacement[1] = -1;
-    }
-
-    private boolean tileInRequiredQuadrant(int row, int col) {
-        return true;
-    }
-
-    private boolean quadrantFull() {
-        return true;
-    }
-
-    private void printQuadrantDetails() {
-
-    }
-
-    private void updateNextQuadrant(int[] pos) {
-
+        super(BOARD_SIZE, WINNING_POINTS, REGION_SIZE);
     }
 
     @Override
@@ -70,14 +45,14 @@ public class Game4x4 extends Game {
             }
 
             // Check that the quadrant matches what is required
-            if (tileInRequiredQuadrant(pos[0], pos[1]) && !quadrantFull()) {
-                printQuadrantDetails();
+            if (super.tileInRequiredSection(pos[0], pos[1]) && !super.sectionFull()) {
+                super.printSectionDetails();
                 continue;
             }
 
             userInputRequired = false;
         }
-        updateNextQuadrant(pos);
+        super.updateNextSection(pos);
         return pos;
     }
 }
