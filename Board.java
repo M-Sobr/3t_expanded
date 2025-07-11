@@ -44,6 +44,7 @@ public class Board {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 System.out.print(tiles[i][j]);
+                System.out.print(' ');
             }
             System.out.println();
         }

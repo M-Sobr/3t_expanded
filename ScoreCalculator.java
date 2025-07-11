@@ -99,9 +99,9 @@ public class ScoreCalculator {
      * 
      * Points Earned:
      *  2: 1 point for opposing team,
-     *  3: 1 point for own team,
-     *  4: 2 points for opposing team,
-     *  5: 2 points for own team,
+     *  3: 3 point for own team,
+     *  4: 5 points for opposing team,
+     *  5: 7 points for own team,
      * ...
      * 
      * @param squareSize The length of the square.
@@ -110,10 +110,10 @@ public class ScoreCalculator {
      */
     private void calculateSquareScore(int squareSize, int quantity, int playerOwnerIndex) {
         if ((squareSize > 1) && (squareSize % 2 == 0)) {
-            scores[(playerOwnerIndex + 1) % 2] += (squareSize / 2) * quantity;
+            scores[(playerOwnerIndex + 1) % 2] += (squareSize * 2 - 3) * quantity;
 
         } else if ((squareSize > 1) && (squareSize % 2 == 1)) {
-            scores[playerOwnerIndex] += ((squareSize - 1) / 2) * quantity;
+            scores[playerOwnerIndex] += (squareSize * 2 - 3) * quantity;
                 
         }
     }

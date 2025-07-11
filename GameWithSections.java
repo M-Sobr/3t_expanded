@@ -57,7 +57,7 @@ public abstract class GameWithSections extends Game {
     }
 
     protected void printPlacementInInvalidSectionMessage() {
-        System.out.println("Placement cannot be made in an invalid section!");
+        System.out.println("Placement cannot be made in the wrong section!");
         System.out.println("The required section is [" + (nextSection[0] + 1) + ", " + (nextSection[1] + 1) + "].");
     }
 
@@ -72,7 +72,7 @@ public abstract class GameWithSections extends Game {
 
     @Override
     protected void printSectionDetails() {
-        if (anySectionPossible()) {
+        if (anySectionPossible() || requiredSectionFull()) {
             System.out.println("You can place anywhere.");
         }
         

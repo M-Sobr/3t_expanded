@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Game4x4 extends GameWithSections {
     
     private static final int BOARD_SIZE = 4;
-    private static final int WINNING_POINTS = 2;
+    private static final int WINNING_POINTS = 3;
     private static final int REGION_SIZE = 2;    
 
 
