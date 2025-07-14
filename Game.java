@@ -9,7 +9,12 @@ public abstract class Game {
     private int currentPlayerIndex;
     private int winningPoints;
 
-    /** Create a new 3x3 game to be played. */
+    /**
+     * Creates a new game to be played.
+     * 
+     * @param boardSize The amount of rows and columns of the board.
+     * @param winningPoints The amount of points required by one player to win.
+    */
     public Game(int boardSize, int winningPoints) {
         this.board = new Board(boardSize);
         initialisePlayers();
@@ -17,10 +22,24 @@ public abstract class Game {
         this.winningPoints = winningPoints;
     }
 
+    /** Create and add the 'X' and 'O' players to this game. */
     private void initialisePlayers() {
         this.players = new ArrayList<>();
         players.add(new Player('X'));
         players.add(new Player('O'));
+    }
+
+    /**
+     * Print a block of text containing scores of each player in this game.
+     * 
+     * @param titleMessage The heading for this section containing the scores.
+     */
+    private void printScores(String titleMessage) {
+        System.out.println(titleMessage);
+            for (Player player : players) {
+                System.out.println(player.getSymbol() + ": "+ player.getPoints());
+            }
+        System.out.println();
     }
 
     /**
@@ -31,7 +50,7 @@ public abstract class Game {
     protected abstract int[] getUserPlacedTilePosition();
 
     
-    /** Calculate the scores of each player on the current board. */
+    /** Calculate the scores of each player on the current board and update them for this game. */
     private void calculateScores() {
         
         int[] scores = (new ScoreCalculator(board, 
@@ -42,27 +61,28 @@ public abstract class Game {
         players.get(1).setPoints(scores[1]);
     }
 
-    /** Nothing happens for a generic game but a game with sections will override this method. */
+    /** Nothing happens for a generic game 
+     * but for a game with sections, this method prints 
+     * information about which section is required to play in.
+    */
     protected void printSectionDetails() {
-
+        
     }
     
 
     /** Runs a tic-tac-toe game from start to finish */
     public void run() {
+        // Initialise variables
         boolean gameOngoing = true;
         char currentPlayerSymbol;
         int turnsElapsed = 0;
         
+        // Loop for game while running
         while (gameOngoing) {
             currentPlayerSymbol = players.get(currentPlayerIndex).getSymbol();
             
             // Print scores
-            System.out.println("Current Scoreboard:");
-            for (Player player : players) {
-                System.out.println(player.getSymbol() + ": "+ player.getPoints());
-            }
-            System.out.println();
+            printScores("Current Scoreboard:");
             
             // Print information about board
             System.out.println("Board State:");
@@ -84,7 +104,8 @@ public abstract class Game {
                     System.out.println("Player " + player.getSymbol() + " has won the game!");
                 }
             }
-
+            
+            // If all the board spaces are full, the game is a stalemate.
             turnsElapsed ++;
             if (turnsElapsed == board.getRows() * board.getCols()) {
                 gameOngoing = false;
@@ -97,12 +118,9 @@ public abstract class Game {
         }
 
         // Print final scores
-        System.out.println("Final Scoreboard:");
-        for (Player player : players) {
-            System.out.println(player.getSymbol() + ": "+ player.getPoints());
-        }
-        System.out.println();
+        printScores("Final Scoreboard:");
 
+        // Have the console keep showing for as long as the player desires to see final scores.
         Scanner closing = new Scanner(System.in);
         closing.nextLine();
         closing.close();

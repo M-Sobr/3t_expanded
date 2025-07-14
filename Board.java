@@ -1,5 +1,6 @@
 /** Represents a square board of a game which can be any size */
 public class Board {
+    /** The symbol on the board which represents an empty tile. */
     public static final char EMPTY_TILE = '_';
     
     private char[][] tiles;
