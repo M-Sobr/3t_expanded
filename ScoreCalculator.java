@@ -114,22 +114,31 @@ public class ScoreCalculator {
         // Keep checking tiles until the square has ended.
         while (true) {
             
-            // Check every tile in the square for each square size.
-            for (int i = rowPos; i <= rowPos + squareSize; i++) {
-                for (int j = colPos; j <= colPos + squareSize; j++) {
-                    
-                    // If the position being checked is outside of the board, the square has ended.
-                    if (!board.containsPosition(i, j)) {
-                        return squareSize;
-                    }
+            // Check for this position being outside of the board or not.
+            // If the bottom-right corner is in the board, so will the rest of the square.
+            if (!board.containsPosition(rowPos + squareSize, colPos + squareSize)) {
+                return squareSize;
+            }
 
-                    // If the owner of the tile is different, the square has ended.
-                    if (board.getTile(i, j) != originSymbol) {
-                        return squareSize;
-                    }
+            // Check tiles in the last column of the square.
+            for (int i = rowPos; i <= rowPos + squareSize; i++) {
+                
+                // If the owner of the tile is different, the square has ended.
+                if (board.getTile(i, colPos + squareSize) != originSymbol) {
+                    return squareSize;
+                }
+            }
+
+            // Check tiles in the last row of the square.
+            for (int j = colPos; j <= colPos + squareSize; j++) {
+                
+                // If the owner of the tile is different, the square has ended.
+                if (board.getTile(rowPos + squareSize, j) != originSymbol) {
+                    return squareSize;
                 }
             }
             squareSize ++;
+            
         }
     }
 
