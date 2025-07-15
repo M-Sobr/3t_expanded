@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /** Used for a 4x4 tic-tac-toe game */
 public class Game4x4 extends GameWithSections {
     
